@@ -1,6 +1,15 @@
-import { MoonStar, Search, SunMedium, UploadCloud } from "lucide-react";
+﻿import { LogOut, MoonStar, Search, SunMedium, UploadCloud } from "lucide-react";
 
-function HeaderBar({ onOpenUpload, onSearchChange, onToggleTheme, searchValue, theme }) {
+function HeaderBar({
+  loading,
+  onOpenUpload,
+  onSearchChange,
+  onSignOut,
+  onToggleTheme,
+  searchValue,
+  theme,
+  userEmail
+}) {
   return (
     <header className="glass-panel sticky top-4 z-30 overflow-hidden px-4 py-4 sm:px-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -31,7 +40,13 @@ function HeaderBar({ onOpenUpload, onSearchChange, onToggleTheme, searchValue, t
             />
           </label>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            {userEmail ? (
+              <span className="chip max-w-[220px] truncate">
+                {loading ? "Syncing library..." : userEmail}
+              </span>
+            ) : null}
+
             <button
               type="button"
               onClick={onToggleTheme}
@@ -48,6 +63,17 @@ function HeaderBar({ onOpenUpload, onSearchChange, onToggleTheme, searchValue, t
             >
               <UploadCloud className="h-4 w-4" />
               Upload
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                void onSignOut();
+              }}
+              className="action-button border border-line/70 bg-panel/80 text-text hover:border-accent/60 hover:bg-accentSoft/70"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">Sign out</span>
             </button>
           </div>
         </div>

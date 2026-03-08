@@ -1,17 +1,20 @@
-import HeaderBar from "./HeaderBar";
+﻿import HeaderBar from "./HeaderBar";
 import Sidebar from "./Sidebar";
 
 function AppShell({
   albums,
   children,
   error,
+  loading,
   onOpenUpload,
   onSearchChange,
+  onSignOut,
   onToggleTheme,
   searchValue,
   smartAlbums,
   summary,
-  theme
+  theme,
+  userEmail
 }) {
   return (
     <div className="relative min-h-screen">
@@ -24,11 +27,14 @@ function AppShell({
 
         <div className="min-w-0 flex-1">
           <HeaderBar
+            loading={loading}
             onOpenUpload={onOpenUpload}
             onSearchChange={onSearchChange}
+            onSignOut={onSignOut}
             onToggleTheme={onToggleTheme}
             searchValue={searchValue}
             theme={theme}
+            userEmail={userEmail}
           />
 
           <div className="mt-4 xl:hidden">
